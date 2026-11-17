@@ -1,0 +1,17 @@
+# 演示评测集：3条prompt，覆盖不同类别
+# reference是“参考输出”，不是唯一标准答案
+
+- case_id: demo_001
+  category: 事实问答
+  prompt: "中国的首都是哪里？"
+  reference: "中国的首都是北京。"
+
+- case_id: demo_002
+  category: 解释说明
+  prompt: "用一句话解释什么是HTTP协议。"
+  reference: "HTTP是一种用于在客户端和服务器之间传输超文本数据的应用层协议。"
+
+- case_id: demo_003
+  category: 同义改写
+  prompt: "把这句话换个说法：今天天气很好。"
+  reference: "今日天气不错。"
