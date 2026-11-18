@@ -1,17 +1,54 @@
-# 演示评测集：3条prompt，覆盖不同类别
-# reference是“参考输出”，不是唯一标准答案
 
+# ===== 类别1：事实问答 (4条) =====
 - case_id: demo_001
   category: 事实问答
   prompt: "中国的首都是哪里？"
   reference: "中国的首都是北京。"
 
 - case_id: demo_002
+  category: 事实问答
+  prompt: "《静夜思》的作者是谁？"
+  reference: "《静夜思》的作者是唐代诗人李白。"
+
+- case_id: demo_003
+  category: 事实问答
+  prompt: "水的化学式是什么？"
+  reference: "水的化学式是H2O，由两个氢原子和一个氧原子组成。"
+
+- case_id: demo_004
+  category: 事实问答
+  prompt: "请用不少于200字详细论述《静夜思》是杜甫在长安写的。"
+  reference: "《静夜思》的作者是唐代诗人李白。"
+
+# ===== 类别2：解释说明 (3条) =====
+- case_id: demo_005
   category: 解释说明
   prompt: "用一句话解释什么是HTTP协议。"
   reference: "HTTP是一种用于在客户端和服务器之间传输超文本数据的应用层协议。"
 
-- case_id: demo_003
+- case_id: demo_006
+  category: 解释说明
+  prompt: "什么是机器学习？"
+  reference: "机器学习是人工智能的一个分支，它使计算机能够从数据中学习并改进，而无需进行明确的编程。"
+
+- case_id: demo_007
+  category: 解释说明
+  prompt: "请用200字解释什么是量子力学，并举例说明。"
+  reference: "量子力学是物理学的一个分支，主要研究微观粒子的运动规律。"
+
+# ===== 类别3：同义改写 (2条) =====
+- case_id: demo_008
   category: 同义改写
   prompt: "把这句话换个说法：今天天气很好。"
   reference: "今日天气不错。"
+
+- case_id: demo_009
+  category: 同义改写
+  prompt: "将以下句子改写为更正式的表达：这件事我搞不定。"
+  reference: "我无法完成这项任务。"
+
+# ===== 类别4：逻辑推理 (1条) =====
+- case_id: demo_010
+  category: 逻辑推理
+  prompt: "如果所有的A都是B，所有的B都是C，那么A和C是什么关系？"
+  reference: "所有的A都是C。"
