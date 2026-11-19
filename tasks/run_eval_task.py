@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 import evaluate
+import jieba
 import yaml
 
 from common.llm_client import LLMClient
@@ -26,6 +27,13 @@ AutoTokenizer.from_pretrained = _patched_from_pretrained
 bleu = evaluate.load("bleu")
 rouge = evaluate.load("rouge")
 bertscore = evaluate.load("bertscore")
+
+
+# ===== 中文分词函数：BLEU/ROUGE 默认 tokenizer 不适配中文 =====
+def chinese_tokenizer(text: str) -> list:
+    """用 jieba 把中文句子切成词列表，供 BLEU/ROUGE 计算 n-gram 重叠。"""
+    return list(jieba.cut(text))
+# ============================================================
 
 # ==========================================
 # 核心：动态获取项目根目录（绝对路径）
@@ -52,13 +60,13 @@ def compute_metrics(prediction: str, reference: str) -> dict:
     # 1. 计算 BLEU（加入 jieba 分词，避免短句全 0）
     try:
         # BLEU 的 references 参数需要嵌套列表（支持多个参考答案）
-        result["bleu"] = round(bleu.compute(predictions=[prediction], references=[[reference]])["bleu"], 4)
+        result["bleu"] = round(bleu.compute(predictions=[prediction], references=[reference], tokenizer=chinese_tokenizer,)["bleu"], 4)
     except Exception as e:
         print(f"❌ BLEU 计算失败: {e}")
 
     # 2. 计算 ROUGE
     try:
-        r = rouge.compute(predictions=[prediction], references=[reference])
+        r = rouge.compute(predictions=[prediction], references=[reference], tokenizer=chinese_tokenizer,)
         result["rouge1"] = round(r["rouge1"], 4)
         result["rougeL"] = round(r["rougeL"], 4)
     except Exception as e:
