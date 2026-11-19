@@ -70,14 +70,14 @@ def main():
     failed = False
 
     if curr_bert is not None and prev_bert is not None:
-        drop = prev_bert - curr_bert
+        drop = curr_bert - prev_bert
         print(f"BERTScore 均值: 基线 {prev_bert:.4f} -> 本次 {curr_bert:.4f} (变化 {drop:.4f})")
         if drop > BERTSCORE_DROP_THRESHOLD:
             print(f"❌ BERTScore 下跌 {drop:.4f}，超过阈值 {BERTSCORE_DROP_THRESHOLD}")
             failed = True
 
     if curr_judge is not None and prev_judge is not None:
-        drop = prev_judge - curr_judge
+        drop = curr_judge - prev_judge
         print(f"Judge overall 均值: 基线 {prev_judge:.2f} -> 本次 {curr_judge:.2f} (变化 {drop:.2f})")
         if drop > JUDGE_DROP_THRESHOLD:
             print(f"❌ Judge overall 下跌 {drop:.2f}，超过阈值 {JUDGE_DROP_THRESHOLD}")
