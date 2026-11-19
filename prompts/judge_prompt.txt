@@ -36,10 +36,10 @@
 **重要：** 参考回答不是唯一正确答案。如果模型输出和参考不同但事实正确、回答了问题，应该给高分。忽略格式是否好看、是否用了礼貌用语，只判断内容本身。
 
 请严格按以下 json 格式输出，不要输出其他内容：
-{
-  "accuracy": {"score": 数字, "reason": "简短理由"},
-  "completeness": {"score": 数字, "reason": "简短理由"},
-  "relevance": {"score": 数字, "reason": "简短理由"},
+{{
+  "accuracy": {{"score": 数字, "reason": "简短理由"}},
+  "completeness": {{"score": 数字, "reason": "简短理由"}},
+  "relevance": {{"score": 数字, "reason": "简短理由"}},
   "overall": 数字,
   "summary": "一句话总结质量"
-}
+}}

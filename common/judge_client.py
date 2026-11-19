@@ -38,10 +38,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 
 class JudgeClient:
     def __init__(self, api_key: str = None, model: str = "deepseek-chat",
-                 prompt_path: str = "prompts/judge_prompt.txt"):
+                 prompt_path: str = os.path.join(BASE_DIR,"prompts/judge_prompt.txt")):
         self.api_key = api_key or os.environ.get("DEEPSEEK_API_KEY")
         if not self.api_key:
             raise ValueError("缺少 DEEPSEEK_API_KEY")
