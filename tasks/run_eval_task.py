@@ -35,6 +35,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EVAL_SET_PATH = os.path.join(BASE_DIR, "eval_sets", "demo_set.yaml")
 REPORTS_DIR = os.path.join(BASE_DIR, "reports")
 MODEL_PATH = os.path.join(BASE_DIR, "bert-base-chinese")
+# 本地有模型文件夹就用本地（你本地开发），CI 没有就回退到 HuggingFace 模型名
+BERT_MODEL = MODEL_PATH if os.path.isdir(MODEL_PATH) else "bert-base-chinese"
 
 
 def load_cases(path: str) -> list:
@@ -68,7 +70,7 @@ def compute_metrics(prediction: str, reference: str) -> dict:
             bertscore.compute(
                 predictions=[prediction],
                 references=[reference],
-                model_type=MODEL_PATH,
+                model_type=BERT_MODEL,
                 num_layers=12
             )["f1"][0], 4
         )
