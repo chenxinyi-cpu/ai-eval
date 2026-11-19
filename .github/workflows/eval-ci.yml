@@ -7,6 +7,8 @@ jobs:
   eval:   #任务名
     name: 运行评测并检查回归    # 页面上显示这个
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}
 
     steps:
       - name: Checkout code
@@ -26,11 +28,13 @@ jobs:
       - name: Run evaluation task
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}
         run: python tasks/run_eval_task.py
 
       - name: Run judge task
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}
         run: python tasks/run_judge_task.py
 
       - name: Generate report
